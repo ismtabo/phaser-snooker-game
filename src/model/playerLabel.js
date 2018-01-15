@@ -89,7 +89,7 @@ export class PlayerLabel {
 
 	// set the label text
 	setName(name){
-		if(score =! null)
+		if(score != null)
 			this.name.setText(score);
 		else{
 			this.name.setText("player");
