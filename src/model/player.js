@@ -20,7 +20,7 @@ export class Player {
 	update(score){
 		if(score>0){
 			this.score += score;
-			this.label.updateScore(this.score+" pts");			
+			this.label.updateScore(this.score);			
 		}
 	}
 

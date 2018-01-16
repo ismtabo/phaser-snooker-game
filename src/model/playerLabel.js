@@ -80,8 +80,8 @@ export class PlayerLabel {
 	// set the label score text
 	updateScore(score){
 		console.log(score);
-		if(score =! null)
-			this.score.setText(score+0);
+		if(score != null)
+			this.score.setText(score);
 		else{
 			this.score.setText("0");
 		}

@@ -78,12 +78,9 @@ export class Snooker {
 			if (!this.keepPlayer) {
 				console.log("switch player");
 				this.switchPlayer();
+				this.setTarget('red');
 			} else {
-				if (this.currentTarget != 'colored') {
-					this.currentTarget = 'colored';
-				} else if (this.currentTarget != 'red') {
-					this.currentTarget = 'red';
-				}
+				this.switchTarget();
 			}
 			this.keepPlayer = false;
 			this.dropTarget = false;
@@ -335,6 +332,11 @@ export class Snooker {
 
 	setTarget(color) {
 		this.target = color;
+		this.graphics.setTarget(this.target);
+	}
+
+	switchTarget() {
+		this.target = this.target === 'red'? 'colored': 'red';
 		this.graphics.setTarget(this.target);
 	}
 
