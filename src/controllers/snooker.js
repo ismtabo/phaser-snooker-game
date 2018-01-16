@@ -1,15 +1,35 @@
+import { Phaser } from 'phaser';
 import { SnookerGraphics } from '../graphics/graphics';
 import { AudioPlayer } from '../controllers/audioPlayer';
 import { Player } from '../model/player';
 
-export class Snooker {
-	constructor(game) {
+export class Snooker extends Phaser.State {
+	constructor() {
 		// Game
-		this.game = game;
+		// this.game = game;
+		super();
+	}
+
+	preload() {
+
 		// graphics
-		this.graphics = new SnookerGraphics(game);
+		this.graphics = new SnookerGraphics(this.game);
 		// audio player
-		this.audio = new AudioPlayer(game);
+		this.audio = new AudioPlayer(this.game);
+		this.graphics.preload();
+		this.audio.preload();
+	}
+
+	create() {
+		//  In this game we should use P2 physics, so we should enable it
+		this.game.physics.startSystem(Phaser.Physics.P2JS);
+		// set the value of velocity of sprites
+		this.game.physics.p2.restitution = 0.5;
+		// We would like to use collision impact, so we enable impact events 
+		// Without this method no callback event will be fired
+		this.game.physics.p2.setImpactEvents(true);
+
+		this.game.physics.p2.updateBoundsCollisionGroup();
 		// current player index 
 		// this should be 1 or 2
 		this.currentPlayer = -1;
@@ -31,14 +51,6 @@ export class Snooker {
 		this.target = 'white';
 		this.dropTarget = false;
 		this.colors = ["red", "green", "pink", "blue", "brown", "yellow", "black"];
-	}
-
-	preload() {
-		this.graphics.preload();
-		this.audio.preload();
-	}
-
-	create() {
 		this.createGraphics();
 		this.createAudioPlayer();
 		this.createPlayers();
