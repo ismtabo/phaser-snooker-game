@@ -1,14 +1,3 @@
-# Custom
-node_modules/
-www/
-platforms/
-plugins/
-dist/
-.vscode/
-*.log
-/index.html
-build/
-
 # Created by https://www.gitignore.io/api/node,visualstudiocode
 
 ### Node ###
@@ -79,6 +68,10 @@ typings/
 !.vscode/launch.json
 !.vscode/extensions.json
 .history
+
+### Webpack ###
+dist/
+/index.html
 
 
 # End of https://www.gitignore.io/api/node,visualstudiocode
