@@ -304,6 +304,7 @@ export class Snooker {
 	dragWhite() {
 		this.white.sprite.inputEnabled = true;
 		this.white.sprite.useHandCursor = true;
+		this.game.physics.p2.pause();
 		this.white.sprite.input.enableDrag();
 
 		this.white.sprite.events.onDragUpdate.add(this.onDragUpdate, this);
@@ -318,9 +319,18 @@ export class Snooker {
 	}
 
 	stopDrag() {
-		this.white.sprite.inputEnabled = false;
-		this.whiteOnHand = false;
-		this.setTarget('red');
+		// Check collision with other balls bellow
+		if (![].concat(this.redBalls).concat(this.coloredBalls).some(ball =>
+			checkOverlapManually(this.white, ball)
+		)) {
+			this.game.physics.p2.resume();
+			this.white.sprite.inputEnabled = false;
+			this.whiteOnHand = false;
+			this.setTarget('red');
+			this.cue.reset(this.white.sprite.x, this.white.sprite.y);
+		} else {
+			console.error('collision')
+		}
 	}
 
 	setTarget(color) {
@@ -328,6 +338,12 @@ export class Snooker {
 		this.graphics.setTarget(this.target);
 	}
 
+}
 
+function checkOverlapManually(ball, other) {
+	var dx = ball.sprite.body.x - other.sprite.body.x;  //distance ship X to enemy X
+	var dy = ball.sprite.body.y - other.sprite.body.y;  //distance ship Y to enemy Y
+	var dist = Math.sqrt(dx * dx + dy * dy);     //pythagoras ^^  (get the distance to each other)
 
+	return dist < 32 // if distance to each other is smaller than ship radius and bullet radius a collision is happening (or an overlap - depends on what you do now)
 }

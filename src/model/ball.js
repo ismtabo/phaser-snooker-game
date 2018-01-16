@@ -21,7 +21,6 @@ export class Ball{
 		ball.body.setCollisionGroup(group);
 		ball.body.damping = 0.5;
 		this.sprite = ball;
-
 	}
 
 	isMoving(){

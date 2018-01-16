@@ -55,8 +55,6 @@ export class SnookerGraphics {
 	}
 
 	createBalls() {
-		// white ball
-		this.white = new Ball(this.game, 240, 240, 'white', this.whiteBallCollisionGroup);
 		// colored balls
 		this.green = new Ball(this.game, 243 + 30, 140 + 30, 'green', this.coloredBallsCollisionGroup);
 		this.pink = new Ball(this.game, 628 + 30, 217 + 30, 'pink', this.coloredBallsCollisionGroup);
@@ -76,6 +74,9 @@ export class SnookerGraphics {
 		for (var i = 0; i < positions.length; i++) {
 			this.redBalls[i] = new Ball(this.game, positions[i].x - 148, positions[i].y - 113, 'red', this.ballsCollisionGroup);
 		}
+		
+		// white ball
+		this.white = new Ball(this.game, 240, 240, 'white', this.whiteBallCollisionGroup);
 
 		this.target = this.createTarget('white');
 
